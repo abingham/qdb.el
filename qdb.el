@@ -1,12 +1,15 @@
 ;; ======================================================================
 ;; qdb (Python remote debugger) functions
 
+(require 'gud)
+
 ;; History of argument lists passed to qdb.
 (defvar gud-qdb-history nil)
 
-; "> filename.py(1234)\n code-and-stuff\n (Cmd) "
+; "> filename.py(1234)\n-> code-and-stuff\n (Cmd) "  OK
+;  "> <frozen importlib._bootstrap>(870)\n->  (Cmd) " FAIL
 (defvar gud-qdb-marker-regexp
-  "^> \\([-a-zA-Z0-9_/.:\\]*\\)(\\([0-9]+\\))[\n\r]->.*[\n\r]")
+  "^> \\([-a-zA-Z0-9_/.:\\<>]*\\)(\\([0-9]+\\))[\n\r]->.*[\n\r]")
 
 (defvar gud-qdb-marker-regexp-file-group 1)
 (defvar gud-qdb-marker-regexp-line-group 2)
