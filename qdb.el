@@ -4,17 +4,15 @@
 ;; History of argument lists passed to qdb.
 (defvar gud-qdb-history nil)
 
-;; Last group is for return value, e.g. "> test.py(2)foo()->None"
-;; Either file or function name may be omitted: "> <string>(0)?()"
+; "> filename.py(1234)\n code-and-stuff\n (Cmd) "
 (defvar gud-qdb-marker-regexp
-  "^ *> \\([-a-zA-Z0-9_/.:\\]*\\|<string>\\)(\\([0-9]+\\))\\([a-zA-Z0-9_]*\\|\\?\\|<module>\\)()\\(->[^\n\r]*\\)?[\n\r]"
-  )
+  "^> \\([-a-zA-Z0-9_/.:\\]*\\)(\\([0-9]+\\))[\n\r]->.*[\n\r]")
 
 (defvar gud-qdb-marker-regexp-file-group 1)
 (defvar gud-qdb-marker-regexp-line-group 2)
-(defvar gud-qdb-marker-regexp-fnname-group 3)
+; (defvar gud-qdb-marker-regexp-fnname-group 3)
 
-(defvar gud-qdb-marker-regexp-start "^\ *> ")
+(defvar gud-qdb-marker-regexp-start "^> ")
 
 ;; There's no guarantee that Emacs will hand the filter the entire
 ;; marker at once; it could be broken up across several strings.  We
